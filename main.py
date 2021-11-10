@@ -1,7 +1,7 @@
 import azure.cognitiveservices.speech as speechsdk
 import time
-from mutagen.wave import WAVE
-import pygame as pygame
+# from mutagen.wave import WAVE
+# import pygame as pygame
 from googletrans import Translator
 from iso_language_codes import *
 
@@ -45,19 +45,6 @@ translator = Translator()
 
 print("\nTranscribed Audio ({}): ".format(language_name(translator.detect(transcribed_result).lang)))
 print(transcribed_result)
-
-# Get Audio Length
-# audio = WAVE(audio_file)
-# audio_info = audio.info
-# length = int(audio_info.length)
-# print('\nThis audio file is {} seconds long'.format(length))
-# print('\nPlaying Audio...')
-# print('Verify Transcription accuracy by listening to the audio while reading the text')
-# pygame.mixer.init()
-# pygame.mixer.music.load(audio_file)
-# pygame.mixer.music.play()
-# time.sleep(length)
-# print('Audio Finished Playing :)')
 
 print('\nTranslation from {} to Hungarian:'.format(language_name(translator.detect(transcribed_result).lang)))
 translated_text = translator.translate(transcribed_result, dest=to_language)
