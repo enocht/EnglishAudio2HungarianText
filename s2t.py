@@ -9,7 +9,7 @@ from iso_language_codes import *
 
 speech_key, service_region = "3eb9c244756b430c8f683f37f3b78ae1", "westeurope"
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
-audio_file = input("Enter Absolute Path of Audio: ")
+audio_file = input("Enter Absolute Path of Audio File: ")
 audio_file_ = speechsdk.audio.AudioConfig(filename=audio_file)
 speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_file_)
 
