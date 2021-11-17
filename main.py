@@ -148,7 +148,7 @@ files_head_ids = False
 files_tail_ids = False
 
 # Get Word Error Rate
-print("\nThe Word Error Rate is", process_line_pair(transcribed_result.lower(), correct_txt.lower()))
+print("\nThe Word Error Rate is", process_line_pair(correct_txt.lower(), transcribed_result.lower()))
 
 # Translate Text to Hungarian
 print('\nTranslation from {} to Hungarian:'.format(language_name(translator.detect(transcribed_result).lang)))
