@@ -102,10 +102,10 @@ speech_recognizer.recognized.connect(lambda evt: result.append(evt.result.text))
 speech_recognizer.session_started.connect(
     lambda evt: print('SESSION STARTED: {}\nListening to the audio file...'.format(evt)))
 speech_recognizer.session_stopped.connect(lambda evt: print('SESSION STOPPED {}'.format(evt)))
-speech_recognizer.canceled.connect(lambda evt: evt)
+# speech_recognizer.canceled.connect(lambda evt: evt)
 # stop continuous recognition on either session stopped or canceled events
 speech_recognizer.session_stopped.connect(stop_cb)
-speech_recognizer.canceled.connect(stop_cb)
+# speech_recognizer.canceled.connect(stop_cb)
 
 # Start continuous speech recognition
 speech_recognizer.start_continuous_recognition()
@@ -113,6 +113,16 @@ while not done:
     time.sleep(.5)
 
 transcribed_result = ' '.join(result)
+
+# Remove all non alphanumeric characters after every word
+# t_r = transcribed_result.split()
+# t_r_2 = []
+# for i in t_r:
+#     res = re.sub(r'^\W+|\W+$', '', i)
+#     t_r_2.append(res.lower())
+# transcribed_result = ' '.join(t_r_2)
+
+
 translator = Translator()
 
 print("\nTranscribed Audio ({}): ".format(language_name(translator.detect(transcribed_result).lang)))
@@ -121,6 +131,14 @@ print(transcribed_result)
 
 with open(input("\nEnter Absolute Path of Reference File For Comparison: "), 'r') as file:
     correct_txt = file.read().rstrip()
+
+# Remove all non alphanumeric characters after every word
+# t_r = correct_txt.split()
+# t_r_2 = []
+# for i in t_r:
+#     res = re.sub(r'^\W+|\W+$', '', i)
+#     t_r_2.append(res.lower())
+# correct_txt = ' '.join(t_r_2)
 
 
 lengths = []
@@ -137,13 +155,3 @@ print('\nTranslation from {} to Hungarian:'.format(language_name(translator.dete
 translated_text = translator.translate(transcribed_result, dest=to_language)
 
 print(translated_text.text)
-
-# Remove all non-alpha numeric characters after every word
-
-# t_r = transcribed_result.split()
-# t_r_2 = []
-# for i in t_r:
-#     res = re.sub(r'^\W+|\W+$', '', i)
-#     t_r_2.append(res.lower())
-# transcribed_result_2 = ' '.join(t_r_2)
-# print(transcribed_result_2)
